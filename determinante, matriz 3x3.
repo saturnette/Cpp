@@ -1,0 +1,75 @@
+#include <iostream>
+
+using namespace std;
+
+double determinante(double matriz[3][3]);
+
+int main (){
+	
+	double A[3][3];
+	
+	for (int i=0; i<3; i++){
+		for (int j=0; j<3; j++){
+			cout<<"Ingrese elemento ["<<i<<"] ["<<j<<"]"<<endl;
+			cin>>A[i][j];
+			
+		}
+	}
+	cout<<endl<<"La matriz es: "<<endl;
+	
+	for (int i=0; i<3; i++){
+		for (int j=0; j<3; j++){
+			cout<<A[i][j]<<"\t";
+		}
+		cout<<endl;
+	}
+	
+	cout<<endl<<"El determinante es: "<<determinante(A);
+	return 0;
+}
+
+double determinante(double matriz[3][3]){
+	
+	double sumarbajadas=0, sumarsubidas=0;
+	double bajada1=1, bajada2=1, bajada3=1;
+	double subida1=1, subida2=1, subida3=1;
+	double determinante=0;
+	
+	for(int i=0; i<3; i++){
+		for(int j=0; j<3; j++){
+			if (i==0 && j==0 || i==1 && j==1 || i==2 && j==2){
+				bajada1*=matriz[i][j];
+			}
+			if (i==0 && j==1 || i==1 && j==2 || i==2 && j==0){
+				bajada2*=matriz[i][j];
+			}
+			if (i==0 && j==2 || i==1 && j==0 || i==2 && j==1){
+				bajada3*=matriz[i][j];
+			}
+		}
+	}
+	
+	for(int i=0; i<3; i++){
+		for(int j=0; j<3; j++){
+			if (i==2 && j==0 || i==1 && j==1 || i==0 && j==2){
+				subida1*=matriz[i][j];
+				subida1*=-1;
+			}
+			if (i==2 && j==1 || i==1 && j==2 || i==0 && j==0){
+				subida2*=matriz[i][j];
+				subida2*=-1;
+			}
+			if (i==2 && j==2 || i==1 && j==0 || i==0 && j==1){
+				subida3*=matriz[i][j];
+				subida3*=-1;
+			}
+		}
+	}
+    
+    sumarbajadas+=bajada1+bajada2+bajada3;
+    sumarsubidas+=subida1+subida2+subida3;
+    
+    determinante=sumarbajadas+sumarsubidas;
+    
+	return determinante;
+}
