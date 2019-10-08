@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+int main(){
+	
+	char texto[100], textoreserva[100], clave1[30], clave2[30];
+	int contador=0;
+	
+	cout<<"Ingrese cualquier texto."<<endl;
+	cin.getline(texto, 100, '\n');
+	
+	cout<<"\nIngrese la palabra que quiere sustituir en el texto."<<endl;
+	cin.getline(clave1, 30, '\n');
+	
+	cout<<"\nIngrese la palabra que va a sustituir a la palabra anterior."<<endl;
+	cin.getline(clave2, 30, '\n');
+	
+	
+	
+	strcpy(textoreserva, texto);
+	
+	if(strstr(texto, clave1)!=NULL){
+		char *token = strtok(texto, " ");
+		
+		cout<<"\nCadena original: "<<textoreserva<<endl;
+		cout<<"Cadena modificada: ";
+		
+		while(token!=NULL){
+			if(strcmp(token, clave1)==0){
+			   cout<<clave2<<" ";
+			   contador++;
+			}
+			else{
+			   cout<<token<<" ";
+			}
+			token = strtok(NULL, " ");
+		}
+		
+		cout<<"\nNumero de intercambios: "<<contador;
+	}
+	else{
+		cout<<"La palabra que quiere sustituir no esta en el texto.";
+	}
+	
+	return 0;
+}
